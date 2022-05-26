@@ -16,6 +16,17 @@ class Snake:
         self.head = self.snake_body[0]
         self.head.color("blue")
 
+    def reset(self):
+        for seg in self.snake_body:
+            seg.goto(1000, 1000)
+        self.snake_body.clear()
+        for i in range(3):
+            self.snake_body.append(Turtle(shape="square"))
+            self.snake_body[i].color("white")
+            self.snake_body[i].penup()
+            self.snake_body[i].goto(x=-i * 20, y=0)
+        self.head = self.snake_body[0]
+        self.head.color("blue")
 
     def move(self):
         for seg_num in range(len(self.snake_body) - 1, 0, -1):
