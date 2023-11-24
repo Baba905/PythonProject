@@ -4,8 +4,8 @@ from flight_data import FlightData
 from flight_search import FlightSearch
 import smtplib
 
-my_mail = "bdiop8683@gmail.com"
-password = "khnggyyukaordocn"
+my_mail = ""
+password = ""
 class NotificationManager:
     #This class is responsible for sending notifications with the deal flight details.
     def message(self, flight_data):
