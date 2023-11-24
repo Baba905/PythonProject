@@ -2,7 +2,7 @@ import  requests
 from pprint import pprint
 import datetime as dt
 
-FlIGHT_SEARCH_KEY = "vJ-VzhFjSxBR0jobIu7tv8Zn0usqZ9uY"
+FlIGHT_SEARCH_KEY = ""
 flight_search_location_endpoint = "https://api.tequila.kiwi.com/locations/query"
 flight_search_endpoint = 'https://api.tequila.kiwi.com/v2/search'
 
@@ -22,7 +22,7 @@ class FlightSearch:
         response.raise_for_status()
         return response.json()["locations"][0]["code"]
 
-    def lowest_flight(self,destination,nb_hold_bag, nb_hand_bag):
+    def lowest_flight(self,destination,nb_hold_bag, nb_hand_bag, stopovers=0):
         today = dt.datetime.today()
         date_from = today + dt.timedelta(days=1)
         date_to = today + dt.timedelta(days=120)
@@ -40,7 +40,7 @@ class FlightSearch:
             "adult_hold_bag": str(nb_hold_bag),
             "adult_hand_bag": str(nb_hand_bag),
             "curr": "EUR",
-            "max_stopovers": "0",
+            "max_stopovers": str(stopovers),
             "limit": '1',
         }
 
@@ -48,8 +48,8 @@ class FlightSearch:
         # pprint(response.text)
         response.raise_for_status()
         data = response.json()["data"][0]
-
-        result = {
+        result= []
+        direct = {
             "price": data["price"],
             "departure_city": data["cityFrom"],
             "departure_airport": data["flyFrom"],
@@ -59,8 +59,20 @@ class FlightSearch:
             "inbound_date": data['route'][1]["local_departure"].split('T')[0],
         }
 
+        result.append(direct)
 
+        if stopovers >= 1 :
+            stopover = {
+                "origin_city":data["route"][1]["cityFrom"],
+                "origin_airport":data["route"][1]["flyFrom"],
+                "destination_city": data["route"][1]["cityTo"],
+                "destination_airport": data["route"][1]["flyTo"],
+                "out_date": data["route"][1]["local_departure"].split('T')[0],
+                "return_date": data["route"][2]["local_departure"].split('T')[0],
+
+            }
+            result.append(stopover)
         return result
 
-# test = FlightSearch().lowest_flight("LON", 1,1)
+# test = FlightSearch().lowest_flight("DPS", 1,1,2)
 # pprint(test)
