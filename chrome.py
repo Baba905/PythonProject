@@ -13,8 +13,8 @@ driver.get(url="https://tinder.com/app/recs")
 driver.implicitly_wait(10)
 
 
-email = "bdiop8683@gmail.com"
-password ="loveTKD99++"
+email = ""
+password =""
 
 connexion = driver.find_element(By.LINK_TEXT, value="Connexion")
 connexion.click()

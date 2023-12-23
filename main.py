@@ -6,8 +6,9 @@ driver = webdriver.Firefox()
 driver.get("https://tinder.com/")
 
 
-email = "bdiop8683@gmail.com"
-password ="loveTKD99++"
+email = "" \
+        ""
+password =""
 
 connexion = driver.find_element(By.LINK_TEXT, value="Connexion")
 connexion.click()
