@@ -3,8 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from time import sleep
 
-TWITTER_EMAIL = "bdiop8683@gmail.com"
-TWITTER_PASSWORD = "loveTKD99++"
+TWITTER_EMAIL = ""
+TWITTER_PASSWORD = ""
 
 class InternetTwitterBot:
     def __init__(self,):
