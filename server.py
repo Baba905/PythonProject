@@ -4,7 +4,7 @@ from flask import Flask,render_template, request
 import requests
 
 my_email = "bdiop8683@gmail.com"
-password = "upse iwhl zvng luix "
+password = ""
 
 app = Flask(__name__)
 reponse = requests.get(url="https://api.npoint.io/8ab1fb320ec3fe1518bd")
